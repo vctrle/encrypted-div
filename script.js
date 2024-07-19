@@ -5,7 +5,7 @@ document.getElementById('encryptButton').addEventListener('click', function() {
     if (htmlContent && passcode) {
         const encrypted = CryptoJS.AES.encrypt(htmlContent, passcode).toString();
         const libraryLink = '<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"><\/script>';
-        const decryptionScript = 
+        const decryptionScript = `
 <script>
 	document.getElementById('decryptButton').addEventListener('click', function() {
 		const decryptPasscode = document.getElementById('decryptPasscode').value;
@@ -27,8 +27,8 @@ document.getElementById('encryptButton').addEventListener('click', function() {
 		}
 	});
 <\/script>
-        ;
-        document.getElementById('htmlInput').value = 
+        `;
+        document.getElementById('htmlInput').value = `
 ${libraryLink}
 <div id="encryptedContent">
 	<input type="password" id="decryptPasscode" placeholder="Enter passcode">
@@ -36,7 +36,7 @@ ${libraryLink}
 	<div id="encryptedData" style="display:none;">${encrypted}</div>
 	${decryptionScript}
 </div>
-        ;
+        `;
     } else {
         alert('Please enter both HTML content and a passcode');
     }
